@@ -11,7 +11,7 @@ function App() {
         <SidebarContainer width="35%" />
         <MapContainer />
       </HStack>
-      </VStack>
+     </VStack>
   );
 }
 
