@@ -9,8 +9,8 @@ function Header() {
                     <Heading m="10px 15px" fontSize={18} > Uvic Environmental Engineering Club</Heading>
                 </HStack>
                 <HStack mr="15px">
-                    <Button m="auto" color="white" bg="#B71E39" h="48px" w="89px">Stop</Button>
-                    <Button m="auto" color="white" bg="#319795" h="48px" w="89px">Start</Button>
+                    <Button m="auto" mr="15px" color="white" bg="#B71E39" h="48px" w="89px">Stop</Button>
+                    <Button m="auto" ml="15px" color="white" bg="#319795" h="48px" w="89px">Start</Button>
             </HStack>
             </Flex>
         </HStack>
