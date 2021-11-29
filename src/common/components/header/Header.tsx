@@ -8,7 +8,7 @@ function Header() {
                 <Heading as='h1' size="md" isTruncated py="5px"> Uvic Environmental Engineering Club</Heading>
             </HStack>
             <HStack mx="15px" alignItems="center">
-                <ButtonGroup mx="10px" spacing="20px"size="lg">
+                <ButtonGroup mx="10px" spacing="20px" size="lg">
                     <Button color="white" bg="#B71E39">Stop</Button>
                     <Button color="white" bg="#319795">Start</Button>
                 </ButtonGroup>
