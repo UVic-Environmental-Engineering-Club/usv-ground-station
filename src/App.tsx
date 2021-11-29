@@ -1,7 +1,7 @@
 import { HStack, VStack } from "@chakra-ui/react";
 import MapContainer from "./common/map/containers/MapContainer";
 import SidebarContainer from "./common/sidebar/containers/SidebarContainer";
-import Header from "./common/header/Header"
+import Header from "./common/components/header/Header"
 
 function App() {
   return (
