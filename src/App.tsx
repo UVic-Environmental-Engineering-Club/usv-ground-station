@@ -5,13 +5,13 @@ import Header from "./common/components/header/Header"
 
 function App() {
   return (
-    <VStack align="stretch">
+    <VStack align="stretch" bg="orange" >
       <Header/>
       <HStack bg="gray" height="100vh">
         <SidebarContainer width="35%" />
         <MapContainer />
       </HStack>
-      </VStack>
+    </VStack>
   );
 }
 

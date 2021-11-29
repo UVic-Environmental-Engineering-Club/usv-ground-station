@@ -1,18 +1,24 @@
-import {Image, Flex, Button, Heading, HStack } from "@chakra-ui/react";
+import {Image, Flex, Button, Heading, HStack} from "@chakra-ui/react";
 
+//h=72px
 function Header() {
     return (
-        <HStack h="50px"  >
-            <Flex justify="space-between" w="100%" >
-                 <Image src="https://github.com/UVic-Environmental-Engineering-Club/usv-ground-station/blob/main/public/logo.png?raw=true" width="50px" height="50px"/>
-                 <Heading m="10px 15px"> Uvic Environmental Engineering Club</Heading>
-                <div >
-                    <Button m="10px 15px 10px 10px" color="white" backgroundColor="#B71E39">Stop</Button>
-                    <Button m="10px" color="white" backgroundColor="#319795">Start</Button>
-               </div>
-            </Flex>
-        </HStack>
+    <HStack bg="white" h="72px" >
+        <Flex justify="space-between" w="100%" >
+            <HStack>
+                <Image src="https://github.com/UVic-Environmental-Engineering-Club/usv-ground-station/blob/main/public/logo.png?raw=true" alignSelf="center" m="5px 5px 5px 15px" width="50px" height="50px"/>
+                <Heading m="10px 15px" fontSize={18} > Uvic Environmental Engineering Club</Heading>
+            </HStack>
+            <HStack mr="15px">
+                <Button m="auto" color="white" bg="#B71E39" h="48px" w="89px">Stop</Button>
+                <Button m="auto" color="white" bg="#319795" h="48px" w="89px">Start</Button>
+           </HStack>
+        </Flex>
+    </HStack>
+
+   
     )
 }
 
 export default Header
+
