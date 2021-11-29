@@ -5,7 +5,7 @@ import Header from "./common/components/header/Header"
 
 function App() {
   return (
-    <VStack align="stretch" bg="orange" >
+    <VStack align="stretch" >
       <Header/>
       <HStack bg="gray" height="100vh">
         <SidebarContainer width="35%" />
