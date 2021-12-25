@@ -8,8 +8,8 @@ interface SidebarContainerProps {
 
 function SidebarContainer({ width }: SidebarContainerProps) {
   return (
-    <VStack maxW={width} minW={width} h="100vh" bg="brown">
-      <Logs />
+    <VStack maxW={width} minW={width} h="100vh" bg="white">
+      <Logs logs={[""]} />
       <Route />
     </VStack>
   );
