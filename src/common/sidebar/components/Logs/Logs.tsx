@@ -8,18 +8,22 @@ interface LogsProps {
 function Logs({ logs }: LogsProps) {
   return (
     <Box
+      h="100%"
+      w="100%"
+      flexGrow={1}
       border="1px"
       borderColor="black"
       boxShadow="dark-lg"
-      h="45em"
-      w="30em"
       bg="white"
+      overflow="scroll"
     >
-      <Heading alignItems="center" mx="20px" my="10px" as="u" size="md">
-        {logs.map((log) => {
-          return <Log message={log} />;
-        })}
-      </Heading>
+      <Box overflow="scroll">
+        <Heading alignItems="center" mx="20px" my="10px" size="md">
+          {logs.map((log) => {
+            return <Log message={log} />;
+          })}
+        </Heading>
+      </Box>
     </Box>
   );
 }

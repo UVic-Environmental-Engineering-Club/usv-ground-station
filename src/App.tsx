@@ -6,7 +6,7 @@ import StatusbarContainer from "./common/statusbar/containers/StatusbarContainer
 
 function App() {
   return (
-    <VStack align="stretch" h="100vh">
+    <VStack align="stretch" h="100vh" overflow="hidden">
       <Header />
       <HStack bg="gray" height="100%">
         <SidebarContainer width="35%" />
