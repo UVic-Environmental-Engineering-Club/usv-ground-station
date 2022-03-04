@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { io } from "socket.io-client";
+import { socket } from "../SocketIO";
 
 interface Point {
   lat: number;
@@ -16,12 +16,16 @@ export interface SocketContext {
   logs: string[];
   points: Point[];
   addPoint: (point: Point) => void;
+  deletePoint: (point: Point) => void;
+  clearRoute: () => void;
 }
 
 export const Context = createContext<SocketContext>({
   logs: [],
   points: [],
   addPoint: (_: Point) => {},
+  deletePoint: (_: Point) => {},
+  clearRoute: () => {},
 });
 
 export function SocketProvider({ children }: PropsWithChildren<any>) {
@@ -29,17 +33,33 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
   const [points, setPoints] = useState<Point[]>([]);
 
   const addPoint = (point: Point) => {
-    setPoints((prev) => [...prev, point]);
+    socket.emit("add_point", point);
+  };
+  const deletePoint = (point: Point) => {
+    socket.emit("delete_point", point);
+  };
+  const clearRoute = () => {
+    socket.emit("clear_route");
   };
 
   useEffect(() => {
-    const socket = io("ws://localhost:8080/groundstation");
-
     socket.on("connect", () => {
       console.log("connected to groundstation");
     });
+    socket.on("init_route", (route: Point[]) => {
+      setPoints(route);
+    });
     socket.on("log", (log) => {
       setLogs((prev) => [...prev, log]);
+    });
+    socket.on("add_point_ack", (point: Point) => {
+      setPoints((prev) => [...prev, point]);
+    });
+    socket.on("delete_point_ack", (route: Point[]) => {
+      setPoints(route);
+    });
+    socket.on("clear_route_ack", () => {
+      setPoints([]);
     });
 
     return () => {
@@ -48,7 +68,9 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
   }, []);
 
   return (
-    <Context.Provider value={{ logs, points, addPoint }}>
+    <Context.Provider
+      value={{ logs, points, addPoint, deletePoint, clearRoute }}
+    >
       {children}
     </Context.Provider>
   );

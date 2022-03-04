@@ -1,10 +1,11 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button, HStack, VStack } from "@chakra-ui/react";
+import { SmallCloseIcon } from "@chakra-ui/icons";
 import { useSocketContext } from "../../../lib/contexts/SocketContext";
 
 function Route() {
-  const { points } = useSocketContext();
+  const { points, deletePoint, clearRoute } = useSocketContext();
   return (
-    <Box
+    <VStack
       h="100%"
       w="100%"
       p="1em"
@@ -12,14 +13,26 @@ function Route() {
       border="1px"
       boxShadow="2xl"
     >
-      {points.map((point) => {
-        return (
-          <Box key={point.lat + point.long}>
-            lat: {point.lat.toFixed(4)}, long: {point.long.toFixed(4)}
-          </Box>
-        );
-      })}
-    </Box>
+      <Box w="100%" overflowY="scroll">
+        {points.map((point) => {
+          return (
+            <HStack key={point.lat + point.long} justifyContent="space-between">
+              <p>
+                lat: {point.lat.toFixed(4)}, long: {point.long.toFixed(4)}
+              </p>
+              <SmallCloseIcon
+                _hover={{ cursor: "pointer" }}
+                color="red.400"
+                onClick={() => {
+                  deletePoint(point);
+                }}
+              />
+            </HStack>
+          );
+        })}
+      </Box>
+      <Button onClick={clearRoute}>Clear Route</Button>
+    </VStack>
   );
 }
 

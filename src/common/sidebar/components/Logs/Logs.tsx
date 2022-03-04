@@ -8,13 +8,11 @@ interface LogsProps {
 function Logs({ logs }: LogsProps) {
   return (
     <Box
-      h="100%"
+      h="80%"
       w="100%"
-      flexGrow={1}
       border="1px"
       borderColor="black"
       boxShadow="md"
-      bg="white"
       overflow="scroll"
     >
       <Box overflow="scroll">
