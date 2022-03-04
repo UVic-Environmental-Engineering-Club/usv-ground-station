@@ -1,14 +1,36 @@
-import { createContext, PropsWithChildren, useEffect, useState } from "react";
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { io } from "socket.io-client";
+
+interface Point {
+  lat: number;
+  long: number;
+}
 
 export interface SocketContext {
   logs: string[];
+  points: Point[];
+  addPoint: (point: Point) => void;
 }
 
-export const Context = createContext<SocketContext>({ logs: [] });
+export const Context = createContext<SocketContext>({
+  logs: [],
+  points: [],
+  addPoint: (_: Point) => {},
+});
 
 export function SocketProvider({ children }: PropsWithChildren<any>) {
   const [logs, setLogs] = useState<string[]>([]);
+  const [points, setPoints] = useState<Point[]>([]);
+
+  const addPoint = (point: Point) => {
+    setPoints((prev) => [...prev, point]);
+  };
 
   useEffect(() => {
     const socket = io("ws://localhost:8080/groundstation");
@@ -25,5 +47,13 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
     };
   }, []);
 
-  return <Context.Provider value={{ logs: logs }}>{children}</Context.Provider>;
+  return (
+    <Context.Provider value={{ logs, points, addPoint }}>
+      {children}
+    </Context.Provider>
+  );
 }
+
+export const useSocketContext = () => {
+  return useContext<SocketContext>(Context);
+};

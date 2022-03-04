@@ -12,7 +12,7 @@ function SidebarContainer({ width }: SidebarContainerProps) {
   const { logs } = useContext<SocketContext>(Context);
 
   return (
-    <VStack maxW={width} minW={width} h="100%" bg="brown">
+    <VStack maxW={width} minW={width} h="100%">
       <Logs logs={logs} />
       <Route />
     </VStack>

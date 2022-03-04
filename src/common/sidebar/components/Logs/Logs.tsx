@@ -13,7 +13,7 @@ function Logs({ logs }: LogsProps) {
       flexGrow={1}
       border="1px"
       borderColor="black"
-      boxShadow="dark-lg"
+      boxShadow="md"
       bg="white"
       overflow="scroll"
     >
