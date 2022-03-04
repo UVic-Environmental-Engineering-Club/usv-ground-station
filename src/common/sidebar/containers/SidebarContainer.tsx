@@ -1,5 +1,7 @@
 import { VStack } from "@chakra-ui/layout";
-import Logs from "../components/Logs";
+import { useContext } from "react";
+import { SocketContext, Context } from "../../../lib/contexts/SocketContext";
+import Logs from "../components/Logs/Logs";
 import Route from "../components/Route";
 
 interface SidebarContainerProps {
@@ -7,9 +9,11 @@ interface SidebarContainerProps {
 }
 
 function SidebarContainer({ width }: SidebarContainerProps) {
+  const { logs } = useContext<SocketContext>(Context);
+
   return (
-    <VStack maxW={width} minW={width} h="100%" bg="brown">
-      <Logs />
+    <VStack maxW={width} minW={width} h="100%">
+      <Logs logs={logs} />
       <Route />
     </VStack>
   );
