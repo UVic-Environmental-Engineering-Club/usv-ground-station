@@ -1,4 +1,4 @@
-import { Box, Heading } from "@chakra-ui/layout";
+import { Box, Heading, Text } from "@chakra-ui/layout";
 import { Log } from "./components/Log";
 
 interface LogsProps {
@@ -16,11 +16,21 @@ function Logs({ logs }: LogsProps) {
       overflow="scroll"
     >
       <Box overflow="scroll">
-        <Heading alignItems="center" mx="20px" my="10px" size="md">
+        <Heading
+          as="h1"
+          textDecoration="underline"
+          alignItems="center"
+          mx="20px"
+          my="10px"
+          size="md"
+        >
+          Logs
+        </Heading>
+        <Text fontSize="md" fontWeight="bold" mx="10px" my="10px" isTruncated>
           {logs.map((log) => {
             return <Log message={log} />;
           })}
-        </Heading>
+        </Text>
       </Box>
     </Box>
   );
