@@ -1,4 +1,4 @@
-import { Flex, HStack, VStack } from "@chakra-ui/react";
+import { HStack, VStack } from "@chakra-ui/react";
 import React from "react";
 
 function StatusbarContainer() {

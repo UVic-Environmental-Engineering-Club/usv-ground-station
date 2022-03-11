@@ -1,3 +1,4 @@
+import { Text } from "@chakra-ui/layout";
 import React from "react";
 
 interface LogProps {
@@ -5,5 +6,11 @@ interface LogProps {
 }
 
 export const Log = ({ message }: LogProps) => {
-  return <div>{message}</div>;
+  return (
+    <div>
+      <Text fontSize="xs" letterSpacing="-1px" my="-3px" px="10px">
+        {message}
+      </Text>
+    </div>
+  );
 };

@@ -16,11 +16,19 @@ function Logs({ logs }: LogsProps) {
       overflow="scroll"
     >
       <Box overflow="scroll">
-        <Heading alignItems="center" mx="20px" my="10px" size="md">
-          {logs.map((log) => {
-            return <Log message={log} />;
-          })}
+        <Heading
+          as="h1"
+          textDecoration="underline"
+          alignItems="center"
+          mx="20px"
+          my="10px"
+          size="md"
+        >
+          Logs
         </Heading>
+        {logs.map((log) => {
+          return <Log message={log} />;
+        })}
       </Box>
     </Box>
   );
