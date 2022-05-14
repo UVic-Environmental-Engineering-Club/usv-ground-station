@@ -1,9 +1,15 @@
-import { Box, Button, HStack, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, VStack } from "@chakra-ui/react";
 import { SmallCloseIcon } from "@chakra-ui/icons";
 import { useSocketContext } from "../../../lib/contexts/SocketContext";
 
 function Route() {
-  const { points, deletePoint, clearRoute } = useSocketContext();
+  const {
+    points,
+    deletePoint,
+    isRouteSelection,
+    clearRoute,
+    setIsRouteSelection,
+  } = useSocketContext();
   return (
     <VStack
       h="100%"
@@ -14,6 +20,18 @@ function Route() {
       boxShadow="2xl"
     >
       <Box w="100%" overflowY="scroll">
+        <Flex justifyContent="flex-end">
+          <Button
+            onClick={() => {
+              setIsRouteSelection(!isRouteSelection);
+            }}
+            size="xs"
+            color="white"
+            bg="#1D49B7"
+          >
+            {isRouteSelection ? "Shore" : "Route"} Selection
+          </Button>
+        </Flex>
         {points.map((point) => {
           return (
             <HStack key={point.lat + point.long} justifyContent="space-between">

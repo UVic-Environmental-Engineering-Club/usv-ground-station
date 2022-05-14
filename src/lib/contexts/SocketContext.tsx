@@ -15,28 +15,33 @@ interface Point {
 export interface SocketContext {
   logs: string[];
   points: Point[];
+  isRouteSelection: boolean;
   addPoint: (point: Point) => void;
   deletePoint: (point: Point) => void;
   clearRoute: () => void;
+  setIsRouteSelection: (bool: boolean) => void;
 }
 
 export const Context = createContext<SocketContext>({
   logs: [],
   points: [],
+  isRouteSelection: false,
   addPoint: (_: Point) => {},
   deletePoint: (_: Point) => {},
   clearRoute: () => {},
+  setIsRouteSelection: (bool: boolean) => {},
 });
 
 export function SocketProvider({ children }: PropsWithChildren<any>) {
   const [logs, setLogs] = useState<string[]>([]);
   const [points, setPoints] = useState<Point[]>([]);
+  const [isRouteSelection, setIsRouteSelection] = useState<boolean>(false);
 
   const addPoint = (point: Point) => {
-    socket.emit("add_point", point);
+    socket.emit("add_point", { point, isRoute: isRouteSelection });
   };
   const deletePoint = (point: Point) => {
-    socket.emit("delete_point", point);
+    socket.emit("delete_point", { point, isRoute: isRouteSelection });
   };
   const clearRoute = () => {
     socket.emit("clear_route");
@@ -52,13 +57,22 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
     socket.on("log", (log) => {
       setLogs((prev) => [...prev, log]);
     });
-    socket.on("add_point_ack", (point: Point) => {
-      setPoints((prev) => [...prev, point]);
-    });
-    socket.on("delete_point_ack", (route: Point[]) => {
+    socket.on("add_point_route_ack", (route: Point[]) => {
       setPoints(route);
     });
+    socket.on("add_point_shore_ack", (shore: Point[]) => {
+      setPoints(shore);
+    });
+    socket.on("delete_point_route_ack", (route: Point[]) => {
+      setPoints(route);
+    });
+    socket.on("delete_point_shore_ack", (shore: Point[]) => {
+      setPoints(shore);
+    });
     socket.on("clear_route_ack", () => {
+      setPoints([]);
+    });
+    socket.on("clear_shore_ack", () => {
       setPoints([]);
     });
 
@@ -69,7 +83,17 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
 
   return (
     <Context.Provider
-      value={{ logs, points, addPoint, deletePoint, clearRoute }}
+      value={{
+        logs,
+        points,
+        isRouteSelection,
+        addPoint,
+        deletePoint,
+        clearRoute,
+        setIsRouteSelection: (bool: boolean) => {
+          setIsRouteSelection(bool);
+        },
+      }}
     >
       {children}
     </Context.Provider>
