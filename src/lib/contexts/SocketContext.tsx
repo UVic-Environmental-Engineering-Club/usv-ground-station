@@ -20,6 +20,7 @@ export interface SocketContext {
   deletePoint: (point: Point) => void;
   clearRoute: () => void;
   setIsRouteSelection: (bool: boolean) => void;
+  setPower: (power: number) => void;
 }
 
 export const Context = createContext<SocketContext>({
@@ -30,6 +31,7 @@ export const Context = createContext<SocketContext>({
   deletePoint: (_: Point) => {},
   clearRoute: () => {},
   setIsRouteSelection: (bool: boolean) => {},
+  setPower: (power: number) => {},
 });
 
 export function SocketProvider({ children }: PropsWithChildren<any>) {
@@ -45,6 +47,9 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
   };
   const clearRoute = () => {
     socket.emit("clear_route");
+  };
+  const setPower = (power: number) => {
+    socket.emit("set_power", { power });
   };
 
   useEffect(() => {
@@ -93,6 +98,7 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
         setIsRouteSelection: (bool: boolean) => {
           setIsRouteSelection(bool);
         },
+        setPower,
       }}
     >
       {children}
