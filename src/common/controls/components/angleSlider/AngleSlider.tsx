@@ -9,11 +9,17 @@ import {
 import { useState } from "react";
 
 export const AngleSlider = () => {
-  const [sliderValue, setSliderValue] = useState(50);
+  const [sliderValue, setSliderValue] = useState(90);
 
   return (
     <Box pt={6} pb={2}>
-      <Slider aria-label="slider-ex-6" onChange={(val) => setSliderValue(val)}>
+      <Slider
+        min={0}
+        max={180}
+        defaultValue={90}
+        aria-label="slider-ex-6"
+        onChange={(val) => setSliderValue(val)}
+      >
         <SliderMark
           value={sliderValue}
           textAlign="center"
@@ -23,7 +29,7 @@ export const AngleSlider = () => {
           ml="-5"
           w="12"
         >
-          {sliderValue}%
+          {sliderValue}°
         </SliderMark>
         <SliderTrack>
           <SliderFilledTrack />
