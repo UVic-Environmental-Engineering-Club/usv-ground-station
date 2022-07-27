@@ -7,9 +7,16 @@ import {
   SliderTrack,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useSocketContext } from "../../../../lib/contexts/SocketContext";
 
 export const AngleSlider = () => {
+  const { setAngle } = useSocketContext();
   const [sliderValue, setSliderValue] = useState(90);
+
+  const onSliderChange = (val: number) => {
+    setSliderValue(val);
+    setAngle(val);
+  };
 
   return (
     <Box pt={6} pb={2}>
@@ -18,7 +25,7 @@ export const AngleSlider = () => {
         max={180}
         defaultValue={90}
         aria-label="slider-ex-6"
-        onChange={(val) => setSliderValue(val)}
+        onChange={onSliderChange}
       >
         <SliderMark
           value={sliderValue}
