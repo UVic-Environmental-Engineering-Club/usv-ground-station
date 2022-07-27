@@ -1,5 +1,6 @@
-import { Box, Heading, SliderMark } from "@chakra-ui/react";
-import { ControlBar } from "./components/controlBar/ControlBar";
+import { Box, Heading } from "@chakra-ui/react";
+import { AngleSlider } from "./components/AngleSlider/AngleSlider";
+import { ControlBar } from "./components/ControlBar/ControlBar";
 
 function Controls() {
   return (
@@ -14,6 +15,7 @@ function Controls() {
       <Heading as="h1" textDecoration="underline" alignItems="center" size="md">
         Controls
       </Heading>
+      <AngleSlider />
       <ControlBar />
     </Box>
   );
