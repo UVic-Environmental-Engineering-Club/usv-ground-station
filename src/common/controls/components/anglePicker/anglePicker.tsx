@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useMemo, useRef } from "react";
 import { useMouse } from "react-use";
-import injectSheet from "react-jss";
 
 const HANDLER_RADIUS = 10;
 const DEFAULT_HANDLER_RADIUS_OFFSET = 30;
@@ -57,11 +56,7 @@ const styles = {
     left: 0,
     zIndex: 0,
   },
-  fullRange: {
-    border: "1px solid black",
-    overflow: "hidden",
-    position: "relative",
-  },
+  fullRange: {},
   relativeAxis: {
     position: "absolute",
   },
@@ -89,12 +84,7 @@ const styles = {
     cursor: "drag",
     userSelect: "none",
   },
-  offsetsSegment: {
-    height: "100%",
-    overflow: "hidden",
-    position: "absolute",
-    width: "100%",
-  },
+  offsetsSegment: {},
   offsetsSegmentRemove: {
     background: "rgba(0,255,0,0.5)",
     height: "100%",
@@ -377,8 +367,10 @@ const AngleRange = ({
       }}
     >
       <div
-        className={classes.fullRange}
         style={{
+          border: "1px solid black",
+          overflow: "hidden",
+          position: "relative",
           width: isQuarterCircle ? radius : 2 * radius,
           height: isQuarterCircle ? radius : 2 * radius,
           borderRadius: 2 * radius,
@@ -389,8 +381,11 @@ const AngleRange = ({
         }}
       >
         <div
-          className={classes.offsetsSegment}
           style={{
+            height: "100%",
+            overflow: "hidden",
+            position: "absolute",
+            width: "100%",
             transform: `translate(${
               isQuarterCircle ? "-100%, 0" : "0, -50%"
             }) rotate(90deg) rotate(${fromAngleHandler.angle}deg)`,
@@ -398,16 +393,22 @@ const AngleRange = ({
           }}
         >
           <div
-            className={classes.offsetsSegmentRemove}
             style={{
+              background: "rgba(0,255,0,0.5)",
+              height: "100%",
+              width: "100%",
+              position: "absolute",
               transform: `translate(0, 100%) rotate(${offsetAngleOfCenter}deg)`,
               transformOrigin: isQuarterCircle ? "100% 0%" : "50% 0%",
             }}
           />
         </div>
         <div
-          className={classes.offsetsSegment}
           style={{
+            height: "100%",
+            overflow: "hidden",
+            position: "absolute",
+            width: "100%",
             transform: `translate(${
               isQuarterCircle ? "-100%, 0" : "0, -50%"
             }) rotate(90deg) rotate(${
@@ -417,8 +418,11 @@ const AngleRange = ({
           }}
         >
           <div
-            className={classes.offsetsSegmentRemove}
             style={{
+              background: "rgba(0,255,0,0.5)",
+              height: "100%",
+              width: "100%",
+              position: "absolute",
               transform: `translate(0, 100%) rotate(${offsetAngleOfCenter}deg)`,
               transformOrigin: isQuarterCircle ? "100% 0%" : "50% 0%",
             }}
@@ -427,19 +431,21 @@ const AngleRange = ({
       </div>
 
       <div
-        className={classes.relativeAxis}
         style={{
+          position: "absolute",
           top: radius + Math.max(handlerRangeRadiusOffset, 0),
           left:
             (isQuarterCircle ? 0 : radius) +
             Math.max(handlerRangeRadiusOffset, 0),
         }}
       >
-        <div className={classes.axisCenter} ref={axisCenterEl} />
+        <div ref={axisCenterEl} />
         <div
           ref={centerHandlerEl}
-          className={classes.centerAngleHandler}
           style={{
+            backgroundColor: "purple",
+            position: "absolute",
+            userSelect: "none",
             width: 2 * handlerRadius,
             height: 2 * handlerRadius,
             borderRadius: 2 * handlerRadius,
@@ -453,8 +459,10 @@ const AngleRange = ({
         />
         <div
           ref={fromAngleHandlerEl}
-          className={classes.offsetAngleHandler}
           style={{
+            backgroundColor: "blue",
+            position: "absolute",
+            userSelect: "none",
             width: offsetHandlerRadius,
             height: 2 * offsetHandlerRadius,
             borderRadius: 0,
@@ -472,8 +480,10 @@ const AngleRange = ({
         />
         <div
           ref={toAngleHandlerEl}
-          className={classes.offsetAngleHandler}
           style={{
+            backgroundColor: "blue",
+            position: "absolute",
+            userSelect: "none",
             width: offsetHandlerRadius,
             height: 2 * offsetHandlerRadius,
             borderRadius: 0,
@@ -492,4 +502,4 @@ const AngleRange = ({
   );
 };
 
-export default injectSheet(styles)(AngleRange);
+export default AngleRange;
