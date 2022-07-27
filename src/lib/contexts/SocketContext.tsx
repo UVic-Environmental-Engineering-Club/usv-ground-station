@@ -21,6 +21,7 @@ export interface SocketContext {
   clearRoute: () => void;
   setIsRouteSelection: (bool: boolean) => void;
   setPower: (power: number) => void;
+  setAngle: (angle: number) => void;
 }
 
 export const Context = createContext<SocketContext>({
@@ -32,6 +33,7 @@ export const Context = createContext<SocketContext>({
   clearRoute: () => {},
   setIsRouteSelection: (bool: boolean) => {},
   setPower: (power: number) => {},
+  setAngle: (angle: number) => {},
 });
 
 export function SocketProvider({ children }: PropsWithChildren<any>) {
@@ -50,6 +52,10 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
   };
   const setPower = (power: number) => {
     socket.emit("set_power", { power });
+  };
+
+  const setAngle = (angle: number) => {
+    socket.emit("set_angle", { angle });
   };
 
   useEffect(() => {
@@ -99,6 +105,7 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
           setIsRouteSelection(bool);
         },
         setPower,
+        setAngle,
       }}
     >
       {children}
