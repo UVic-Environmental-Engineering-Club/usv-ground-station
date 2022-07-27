@@ -10,7 +10,7 @@ import { useSocketContext } from "../../../../lib/contexts/SocketContext";
 
 export const ControlBar = () => {
   const { setPower } = useSocketContext();
-  const [sliderValue, setSliderValue] = useState(50);
+  const [sliderValue, setSliderValue] = useState(0);
 
   const onSliderChange = (val: number) => {
     setSliderValue(val);
@@ -20,6 +20,7 @@ export const ControlBar = () => {
   return (
     <Box pt={6} pb={2}>
       <Slider
+        defaultValue={0}
         orientation="vertical"
         top="30px"
         h="250px"
