@@ -5,13 +5,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
 import { SocketProvider } from "./lib/contexts/SocketContext";
+import { SettingsProvider } from "./lib/contexts/SettingsContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
-      <SocketProvider>
-        <App />
-      </SocketProvider>
+      <SettingsProvider>
+        <SocketProvider>
+          <App />
+        </SocketProvider>
+      </SettingsProvider>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")
