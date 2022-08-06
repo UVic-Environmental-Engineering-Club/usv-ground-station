@@ -3,17 +3,16 @@ import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import React from "react";
 import { useSocketContext } from "../../../lib/contexts/SocketContext";
 
+const center = {
+  lat: 48.44606960958475,
+  lng: -123.28338270697772,
+};
+
 function MapContainer() {
-  const { addPoint, points } = useSocketContext();
+  const { addPoint, points, usvPoint } = useSocketContext();
   const containerStyle = {
     width: "100%",
     height: "100%",
-  };
-
-  // Cadboro bay
-  const center = {
-    lat: 48.44606960958475,
-    lng: -123.28338270697772,
   };
 
   return (
@@ -36,6 +35,13 @@ function MapContainer() {
               />
             );
           })}
+          {usvPoint && (
+            <Marker
+              icon={"./boat.png"}
+              key={usvPoint.lat + usvPoint.long}
+              position={{ lat: usvPoint.lat, lng: usvPoint.long }}
+            />
+          )}
         </GoogleMap>
       </LoadScript>
     </Flex>
