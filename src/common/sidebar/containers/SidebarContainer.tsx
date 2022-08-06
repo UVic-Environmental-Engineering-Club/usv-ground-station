@@ -1,9 +1,10 @@
 import { VStack } from "@chakra-ui/layout";
 import { useContext } from "react";
+import { useSettingsContext } from "../../../lib/contexts/SettingsContext";
 import { SocketContext, Context } from "../../../lib/contexts/SocketContext";
 import Controls from "../../controls/Controls";
 import Logs from "../components/Logs/Logs";
-// import Route from "../components/Route";
+import Route from "../components/Route";
 
 interface SidebarContainerProps {
   width: string;
@@ -11,12 +12,12 @@ interface SidebarContainerProps {
 
 function SidebarContainer({ width }: SidebarContainerProps) {
   const { logs } = useContext<SocketContext>(Context);
+  const { isManualControl } = useSettingsContext();
 
   return (
     <VStack maxW={width} minW={width} h="100%">
       <Logs logs={logs} />
-      <Controls />
-      {/* <Route /> */}
+      {isManualControl ? <Controls /> : <Route />}
     </VStack>
   );
 }

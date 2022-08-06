@@ -1,4 +1,5 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading } from "@chakra-ui/react";
+import { useSettingsContext } from "../../lib/contexts/SettingsContext";
 import { AngleSlider } from "./components/AngleSlider/AngleSlider";
 import { ControlBar } from "./components/ControlBar/ControlBar";
 
