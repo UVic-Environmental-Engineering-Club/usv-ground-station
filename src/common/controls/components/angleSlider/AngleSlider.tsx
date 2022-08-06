@@ -6,8 +6,9 @@ import {
   SliderThumb,
   SliderTrack,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useSocketContext } from "../../../../lib/contexts/SocketContext";
+import debounce from "lodash.debounce";
 
 export const AngleSlider = () => {
   const { setAngle } = useSocketContext();
@@ -18,6 +19,8 @@ export const AngleSlider = () => {
     setAngle(val);
   };
 
+  const debouncedHandler = useMemo(() => debounce(onSliderChange, 300), []);
+
   return (
     <Box pt={6} pb={2}>
       <Slider
@@ -25,7 +28,7 @@ export const AngleSlider = () => {
         max={180}
         defaultValue={90}
         aria-label="slider-ex-6"
-        onChange={onSliderChange}
+        onChange={debouncedHandler}
       >
         <SliderMark
           value={sliderValue}

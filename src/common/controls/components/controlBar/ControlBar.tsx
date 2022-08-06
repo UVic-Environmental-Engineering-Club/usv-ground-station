@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Slider,
   SliderTrack,
@@ -7,6 +7,7 @@ import {
   SliderMark,
 } from "@chakra-ui/react";
 import { useSocketContext } from "../../../../lib/contexts/SocketContext";
+import debounce from "lodash.debounce";
 
 export const ControlBar = () => {
   const { setPower } = useSocketContext();
@@ -17,6 +18,8 @@ export const ControlBar = () => {
     setPower(val);
   };
 
+  const debouncedHandler = useMemo(() => debounce(onSliderChange, 300), []);
+
   return (
     <Box pt={6} pb={2}>
       <Slider
@@ -26,7 +29,7 @@ export const ControlBar = () => {
         h="250px"
         w="200px"
         aria-label="slider-ex-6"
-        onChange={onSliderChange}
+        onChange={debouncedHandler}
       >
         <SliderMark
           value={sliderValue}
