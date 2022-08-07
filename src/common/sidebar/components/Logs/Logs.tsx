@@ -13,9 +13,9 @@ function Logs({ logs }: LogsProps) {
       border="1px"
       borderColor="black"
       boxShadow="md"
-      overflow="scroll"
+      overflow="hidden"
     >
-      <Box overflow="scroll">
+      <Box overflow="hidden">
         <Heading
           as="h1"
           textDecoration="underline"
@@ -26,9 +26,11 @@ function Logs({ logs }: LogsProps) {
         >
           Logs
         </Heading>
-        {logs.map((log) => {
-          return <Log message={log} />;
-        })}
+        <Box overflowY="scroll">
+          {logs.map((log) => {
+            return <Log message={log} />;
+          })}
+        </Box>
       </Box>
     </Box>
   );
