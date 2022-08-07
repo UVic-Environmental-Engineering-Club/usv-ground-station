@@ -9,7 +9,7 @@ import {
 import { useSocketContext } from "../../../../lib/contexts/SocketContext";
 import debounce from "lodash.debounce";
 
-export const ControlBar = () => {
+export const PowerBar = () => {
   const { setPower } = useSocketContext();
   const [sliderValue, setSliderValue] = useState(0);
 
@@ -24,23 +24,22 @@ export const ControlBar = () => {
     <Box pt={6} pb={2}>
       <Slider
         defaultValue={0}
-        orientation="vertical"
-        top="30px"
-        h="250px"
-        w="200px"
+        top="130px"
         aria-label="slider-ex-6"
         onChange={debouncedHandler}
       >
         <SliderMark
           value={sliderValue}
-          orientation="vertical"
           textAlign="center"
           color="black"
-          right="20px"
+          top="90px"
+          mt="-10"
+          ml="-5"
+          w="12"
         >
           {sliderValue}%
         </SliderMark>
-        <SliderTrack w="80px">
+        <SliderTrack h="80px">
           <SliderFilledTrack />
         </SliderTrack>
       </Slider>
