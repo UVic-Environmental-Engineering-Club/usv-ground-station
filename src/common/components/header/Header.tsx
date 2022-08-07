@@ -37,7 +37,7 @@ function Header() {
               setIsManualControl(!isManualControl);
             }}
           >
-            Settings
+            {isManualControl ? "Manual Control" : "Autonomous"}
           </Button>
         </ButtonGroup>
       </HStack>
