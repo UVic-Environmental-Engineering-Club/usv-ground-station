@@ -26,6 +26,7 @@ export const AngleSlider = () => {
       <Slider
         min={0}
         max={180}
+        top="30px"
         defaultValue={90}
         aria-label="slider-ex-6"
         onChange={debouncedHandler}
