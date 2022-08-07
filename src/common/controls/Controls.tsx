@@ -1,7 +1,6 @@
-import { Box, Button, Heading } from "@chakra-ui/react";
-import { useSettingsContext } from "../../lib/contexts/SettingsContext";
+import { Box, Heading } from "@chakra-ui/react";
 import { AngleSlider } from "./components/AngleSlider/AngleSlider";
-import { ControlBar } from "./components/ControlBar/ControlBar";
+import { PowerBar } from "./components/PowerBar/PowerBar";
 
 function Controls() {
   return (
@@ -17,7 +16,7 @@ function Controls() {
         Controls
       </Heading>
       <AngleSlider />
-      <ControlBar />
+      <PowerBar />
     </Box>
   );
 }
