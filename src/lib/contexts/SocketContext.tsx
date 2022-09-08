@@ -15,6 +15,7 @@ interface Point {
 export interface SocketContext {
   logs: string[];
   points: Point[];
+  usvPoint: Point | null;
   isRouteSelection: boolean;
   addPoint: (point: Point) => void;
   deletePoint: (point: Point) => void;
@@ -27,6 +28,7 @@ export interface SocketContext {
 export const Context = createContext<SocketContext>({
   logs: [],
   points: [],
+  usvPoint: null,
   isRouteSelection: false,
   addPoint: (_: Point) => {},
   deletePoint: (_: Point) => {},
@@ -39,6 +41,7 @@ export const Context = createContext<SocketContext>({
 export function SocketProvider({ children }: PropsWithChildren<any>) {
   const [logs, setLogs] = useState<string[]>([]);
   const [points, setPoints] = useState<Point[]>([]);
+  const [usvPoint, setUsvPoint] = useState<Point | null>(null);
   const [isRouteSelection, setIsRouteSelection] = useState<boolean>(false);
 
   const addPoint = (point: Point) => {
@@ -65,9 +68,6 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
     socket.on("init_route", (route: Point[]) => {
       setPoints(route);
     });
-    socket.on("log", (log) => {
-      setLogs((prev) => [...prev, log]);
-    });
     socket.on("add_point_route_ack", (route: Point[]) => {
       setPoints(route);
     });
@@ -87,6 +87,21 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
       setPoints([]);
     });
 
+    socket.on("serial", (data: any) => {
+      setLogs((prev) => [...prev, JSON.stringify(data)]);
+    });
+
+    socket.on(
+      "usv_gps",
+      (data: { type: string; data: { long: string; lat: string } }) => {
+        setUsvPoint({
+          long: parseFloat(data.data.long),
+          lat: parseFloat(data.data.lat),
+        });
+        setLogs((prev) => [...prev, JSON.stringify(data)]);
+      }
+    );
+
     return () => {
       socket.disconnect();
     };
@@ -97,6 +112,7 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
       value={{
         logs,
         points,
+        usvPoint,
         isRouteSelection,
         addPoint,
         deletePoint,
