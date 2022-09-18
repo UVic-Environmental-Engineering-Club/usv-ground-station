@@ -2,6 +2,11 @@
 
 This is the software that is going to run locally on a laptop and will be able set routes and control the USV through the socket server.
 
+To work properly, this needs to run on conjunction with the other repos:
+
+- usv-pi
+- usv-server
+
 [Project Structure for USV](https://github.com/UVic-Environmental-Engineering-Club/USV-Pi/wiki/Project-Structure)
 
 [Figma](https://www.figma.com/file/KwBBNtbOjbW7ulZv6U8vtd/USV-Ground-Station-GUI?node-id=0%3A1) - Mockup subject to change.
