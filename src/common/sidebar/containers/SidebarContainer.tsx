@@ -15,7 +15,7 @@ function SidebarContainer({ width }: SidebarContainerProps) {
   const { isManualControl } = useSettingsContext();
 
   return (
-    <VStack maxW={width} minW={width} h="100%">
+    <VStack maxW={width} minW={width} h="2xl">
       <Logs logs={logs} />
       {isManualControl ? <Controls /> : <Route />}
     </VStack>
