@@ -20,6 +20,7 @@ export interface SocketContext {
   addPoint: (point: Point) => void;
   deletePoint: (point: Point) => void;
   clearRoute: () => void;
+  clearShore: () => void;
   setIsRouteSelection: (bool: boolean) => void;
   setPower: (power: number) => void;
   setAngle: (angle: number) => void;
@@ -33,6 +34,7 @@ export const Context = createContext<SocketContext>({
   addPoint: (_: Point) => {},
   deletePoint: (_: Point) => {},
   clearRoute: () => {},
+  clearShore: () => {},
   setIsRouteSelection: (bool: boolean) => {},
   setPower: (power: number) => {},
   setAngle: (angle: number) => {},
@@ -53,10 +55,12 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
   const clearRoute = () => {
     socket.emit("clear_route");
   };
+  const clearShore = () => {
+    socket.emit("clear_shore");
+  };
   const setPower = (power: number) => {
     socket.emit("set_power", { power });
   };
-
   const setAngle = (angle: number) => {
     socket.emit("set_angle", { angle });
   };
@@ -67,6 +71,9 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
     });
     socket.on("init_route", (route: Point[]) => {
       setPoints(route);
+    });
+    socket.on("init_shore", (shore: Point[]) => {
+      setPoints(shore);
     });
     socket.on("add_point_route_ack", (route: Point[]) => {
       setPoints(route);
@@ -86,11 +93,9 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
     socket.on("clear_shore_ack", () => {
       setPoints([]);
     });
-
     socket.on("serial", (data: any) => {
       setLogs((prev) => [...prev, JSON.stringify(data)]);
     });
-
     socket.on(
       "usv_gps",
       (data: { type: string; data: { long: string; lat: string } }) => {
@@ -117,6 +122,7 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
         addPoint,
         deletePoint,
         clearRoute,
+        clearShore,
         setIsRouteSelection: (bool: boolean) => {
           setIsRouteSelection(bool);
         },
