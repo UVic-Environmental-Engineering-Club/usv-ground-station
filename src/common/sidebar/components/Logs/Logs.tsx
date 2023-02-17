@@ -8,12 +8,12 @@ interface LogsProps {
 function Logs({ logs }: LogsProps) {
   return (
     <Box
-      h="80%"
+      h="full"
       w="100%"
       border="1px"
       borderColor="black"
       boxShadow="md"
-      overflow="hidden"
+      overflowY="scroll"
     >
       <Box overflow="hidden">
         <Heading
@@ -26,7 +26,7 @@ function Logs({ logs }: LogsProps) {
         >
           Logs
         </Heading>
-        <Box overflowY="scroll">
+        <Box>
           {logs.map((log) => {
             return <Log message={log} />;
           })}
