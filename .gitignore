@@ -25,4 +25,4 @@ yarn-error.log*
 .env
 
 #vulnerable
-src/lib/SocketIO.tsx
+/src/lib/SocketIO.tsx
