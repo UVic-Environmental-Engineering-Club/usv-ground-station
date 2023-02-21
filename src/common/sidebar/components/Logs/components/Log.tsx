@@ -7,10 +7,10 @@ interface LogProps {
 
 export const Log = ({ message }: LogProps) => {
   return (
-    <div>
+    <span>
       <Text fontSize="xs" letterSpacing="-1px" my="-3px" px="10px">
         {message}
       </Text>
-    </div>
+    </span>
   );
 };
