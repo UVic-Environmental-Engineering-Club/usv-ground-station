@@ -1,5 +1,5 @@
 import { Box, Heading } from "@chakra-ui/react";
-import { AngleSlider } from "./components/AngleSlider/AngleSlider";
+import { AngleSlider } from "./components/angleSlider/AngleSlider";
 import { PowerBar } from "./components/PowerBar/PowerBar";
 
 function Controls() {
