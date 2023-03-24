@@ -3,7 +3,7 @@ import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { useSocketContext } from "../../../lib/contexts/SocketContext";
 
 function MapContainer() {
-  const { addPoint, points, usvPoint, shorePoints, isRouteSelection } = useSocketContext();
+  const { addPoint, routePoints, usvPoint, shorePoints, isRouteSelection } = useSocketContext();
   const containerStyle = {
     width: "100%",
     height: "100%",
@@ -35,7 +35,7 @@ function MapContainer() {
               );
             })
           ): (
-            points.map((point) => {
+            routePoints.map((point) => {
               return (
                 <Marker
                   key={point.lat + point.long}

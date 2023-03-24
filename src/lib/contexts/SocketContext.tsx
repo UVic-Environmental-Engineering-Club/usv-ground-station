@@ -14,7 +14,7 @@ interface Point {
 
 export interface SocketContext {
   logs: string[];
-  points: Point[];
+  routePoints: Point[];
   shorePoints: Point[];
   usvPoint: Point | null;
   isRouteSelection: boolean;
@@ -31,7 +31,7 @@ export interface SocketContext {
 
 export const Context = createContext<SocketContext>({
   logs: [],
-  points: [],
+  routePoints: [],
   shorePoints: [],
   usvPoint: null,
   isRouteSelection: false,
@@ -48,7 +48,7 @@ export const Context = createContext<SocketContext>({
 
 export function SocketProvider({ children }: PropsWithChildren<any>) {
   const [logs, setLogs] = useState<string[]>([]);
-  const [points, setRoutePoints] = useState<Point[]>([]);
+  const [routePoints, setRoutePoints] = useState<Point[]>([]);
   const [usvPoint, setUsvPoint] = useState<Point | null>(null);
   const [isRouteSelection, setIsRouteSelection] = useState<boolean>(false);
   const [shorePoints, setShorePoints] = useState<Point[]>([]);
@@ -123,7 +123,7 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
     <Context.Provider
       value={{
         logs,
-        points,
+        routePoints,
         usvPoint,
         isRouteSelection,
         addPoint,

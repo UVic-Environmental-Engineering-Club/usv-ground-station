@@ -4,7 +4,7 @@ import { useSocketContext } from "../../../lib/contexts/SocketContext";
 
 function Route() {
   const {
-    points,
+    routePoints,
     deletePoint,
     isRouteSelection,
     clearRoute,
@@ -63,7 +63,7 @@ function Route() {
               );
             })
             ) : (
-              points.map((point) => {
+              routePoints.map((point) => {
                 return (
                   <HStack key={point.lat + point.long} justifyContent="space-between">
                     <p>
