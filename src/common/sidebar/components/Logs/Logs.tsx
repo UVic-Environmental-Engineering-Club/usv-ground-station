@@ -13,7 +13,6 @@ function Logs({ logs }: LogsProps) {
       border="1px"
       borderColor="black"
       boxShadow="md"
-      overflowY="scroll"
     >
       <Box overflow="hidden">
         <Heading
@@ -26,7 +25,10 @@ function Logs({ logs }: LogsProps) {
         >
           Logs
         </Heading>
-        <Box>
+        <Box
+          h="60"
+          overflowY="scroll"
+        >
           {logs.map((log) => {
             return <Log message={log} />;
           })}

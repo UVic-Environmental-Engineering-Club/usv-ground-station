@@ -1,7 +1,11 @@
 import { HStack, VStack } from "@chakra-ui/react";
 import React from "react";
+import { useSocketContext } from "../../../lib/contexts/SocketContext";
 
 function StatusbarContainer() {
+  const {
+    usvPoint,
+  } = useSocketContext();
   return (
     <HStack
       grow={1}
@@ -15,15 +19,15 @@ function StatusbarContainer() {
     >
       <VStack>
         <div>Status:</div>
-        <div>Online</div>
+        <span>{usvPoint ? 'Online' : 'Offline'}</span>
       </VStack>
       <VStack>
         <div>Latitude:</div>
-        <div>0</div>
+        <span>{usvPoint?.lat.toFixed(6)}</span>
       </VStack>
       <VStack>
         <div>Logitude:</div>
-        <div>0</div>
+        <span>{usvPoint?.long.toFixed(6)}</span>
       </VStack>
       <VStack>
         <div>Speed:</div>

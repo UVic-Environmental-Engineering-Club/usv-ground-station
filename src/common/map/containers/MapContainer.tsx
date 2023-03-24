@@ -1,19 +1,17 @@
 import { Flex } from "@chakra-ui/react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import React from "react";
 import { useSocketContext } from "../../../lib/contexts/SocketContext";
 
-const center = {
-  lat: 48.44606960958475,
-  lng: -123.28338270697772,
-};
-
 function MapContainer() {
-  const { addPoint, points, usvPoint } = useSocketContext();
+  const { addPoint, points, usvPoint, shorePoints, isRouteSelection } = useSocketContext();
   const containerStyle = {
     width: "100%",
     height: "100%",
   };
+
+  const center = usvPoint && usvPoint.lat && usvPoint.long
+  ? { lat: usvPoint.lat, lng: usvPoint.long }
+  : { lat: 48.44606960958475, lng: -123.28338270697772};
 
   return (
     <Flex grow={1} h="100%" bg="purple">
@@ -27,14 +25,25 @@ function MapContainer() {
             addPoint({ lat: e.latLng.lat(), long: e.latLng.lng() });
           }}
         >
-          {points.map((point) => {
-            return (
-              <Marker
-                key={point.lat + point.long}
-                position={{ lat: point.lat, lng: point.long }}
-              />
-            );
-          })}
+          {isRouteSelection ? (
+            shorePoints.map((point) => {
+              return (
+                <Marker
+                  key={point.lat + point.long}
+                  position={{ lat: point.lat, lng: point.long }}
+                />
+              );
+            })
+          ): (
+            points.map((point) => {
+              return (
+                <Marker
+                  key={point.lat + point.long}
+                  position={{ lat: point.lat, lng: point.long }}
+                />
+              );
+            })
+          )}
           {usvPoint && (
             <Marker
               icon={"./boat.png"}
