@@ -14,12 +14,8 @@ interface Point {
 
 export interface SocketContext {
   logs: string[];
-<<<<<<< Updated upstream
-  points: Point[];
-=======
   routePoints: Point[];
   shorePoints: Point[];
->>>>>>> Stashed changes
   usvPoint: Point | null;
   isRouteSelection: boolean;
   addPoint: (point: Point) => void;
@@ -29,48 +25,45 @@ export interface SocketContext {
   setIsRouteSelection: (bool: boolean) => void;
   setPower: (power: number) => void;
   setAngle: (angle: number) => void;
+  setRoutePoints: (point: Point[]) => void;
+  setShorePoints: (points: Point[]) => void;
 }
 
 export const Context = createContext<SocketContext>({
   logs: [],
-<<<<<<< Updated upstream
-  points: [],
-=======
   routePoints: [],
   shorePoints: [],
->>>>>>> Stashed changes
   usvPoint: null,
   isRouteSelection: false,
   addPoint: (_: Point) => {},
   deletePoint: (_: Point) => {},
+  setRoutePoints: (_: Point[]) => {},
   clearRoute: () => {},
   clearShore: () => {},
   setIsRouteSelection: (bool: boolean) => {},
   setPower: (power: number) => {},
   setAngle: (angle: number) => {},
+  setShorePoints: (_: Point[]) => {},
 });
 
 export function SocketProvider({ children }: PropsWithChildren<any>) {
   const [logs, setLogs] = useState<string[]>([]);
-<<<<<<< Updated upstream
-  const [points, setPoints] = useState<Point[]>([]);
-=======
   const [routePoints, setRoutePoints] = useState<Point[]>([]);
->>>>>>> Stashed changes
   const [usvPoint, setUsvPoint] = useState<Point | null>(null);
   const [isRouteSelection, setIsRouteSelection] = useState<boolean>(false);
+  const [shorePoints, setShorePoints] = useState<Point[]>([]);
 
   const addPoint = (point: Point) => {
-    socket.emit("add_point", { point, isRoute: isRouteSelection });
+    socket.emit("add_point", { point, isRoute: !isRouteSelection });
   };
   const deletePoint = (point: Point) => {
-    socket.emit("delete_point", { point, isRoute: isRouteSelection });
+    socket.emit("delete_point", { point, isRoute: !isRouteSelection });
   };
   const clearRoute = () => {
-    socket.emit("clear_route");
+    socket.emit("clear_route", {isRouteSelection: !isRouteSelection});
   };
   const clearShore = () => {
-    socket.emit("clear_shore");
+    socket.emit("clear_shore", {isRouteSelection: !isRouteSelection});
   };
   const setPower = (power: number) => {
     socket.emit("set_power", { power });
@@ -84,28 +77,28 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
       console.log("connected to groundstation");
     });
     socket.on("init_route", (route: Point[]) => {
-      setPoints(route);
+      setRoutePoints(route);
     });
     socket.on("init_shore", (shore: Point[]) => {
-      setPoints(shore);
+      setShorePoints(shore);
     });
     socket.on("add_point_route_ack", (route: Point[]) => {
-      setPoints(route);
+      setRoutePoints(route);
     });
     socket.on("add_point_shore_ack", (shore: Point[]) => {
-      setPoints(shore);
+      setShorePoints(shore);
     });
     socket.on("delete_point_route_ack", (route: Point[]) => {
-      setPoints(route);
+      setRoutePoints(route);
     });
     socket.on("delete_point_shore_ack", (shore: Point[]) => {
-      setPoints(shore);
+      setShorePoints(shore);
     });
     socket.on("clear_route_ack", () => {
-      setPoints([]);
+      setRoutePoints([]);
     });
     socket.on("clear_shore_ack", () => {
-      setPoints([]);
+      setShorePoints([]);
     });
     socket.on("serial", (data: any) => {
       setLogs((prev) => [...prev, JSON.stringify(data)]);
@@ -135,13 +128,16 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
         isRouteSelection,
         addPoint,
         deletePoint,
+        setRoutePoints,
         clearRoute,
         clearShore,
+        shorePoints,
         setIsRouteSelection: (bool: boolean) => {
           setIsRouteSelection(bool);
         },
         setPower,
         setAngle,
+        setShorePoints,
       }}
     >
       {children}
