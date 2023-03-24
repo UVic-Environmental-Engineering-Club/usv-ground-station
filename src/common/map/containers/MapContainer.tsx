@@ -9,7 +9,11 @@ const center = {
 };
 
 function MapContainer() {
+<<<<<<< Updated upstream
   const { addPoint, points, usvPoint } = useSocketContext();
+=======
+  const { addPoint, routePoints, usvPoint, shorePoints, isRouteSelection } = useSocketContext();
+>>>>>>> Stashed changes
   const containerStyle = {
     width: "100%",
     height: "100%",
@@ -27,6 +31,7 @@ function MapContainer() {
             addPoint({ lat: e.latLng.lat(), long: e.latLng.lng() });
           }}
         >
+<<<<<<< Updated upstream
           {points.map((point) => {
             return (
               <Marker
@@ -35,6 +40,27 @@ function MapContainer() {
               />
             );
           })}
+=======
+          {isRouteSelection ? (
+            shorePoints.map((point) => {
+              return (
+                <Marker
+                  key={point.lat + point.long}
+                  position={{ lat: point.lat, lng: point.long }}
+                />
+              );
+            })
+          ): (
+            routePoints.map((point) => {
+              return (
+                <Marker
+                  key={point.lat + point.long}
+                  position={{ lat: point.lat, lng: point.long }}
+                />
+              );
+            })
+          )}
+>>>>>>> Stashed changes
           {usvPoint && (
             <Marker
               icon={"./boat.png"}

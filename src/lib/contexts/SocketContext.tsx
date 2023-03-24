@@ -14,7 +14,12 @@ interface Point {
 
 export interface SocketContext {
   logs: string[];
+<<<<<<< Updated upstream
   points: Point[];
+=======
+  routePoints: Point[];
+  shorePoints: Point[];
+>>>>>>> Stashed changes
   usvPoint: Point | null;
   isRouteSelection: boolean;
   addPoint: (point: Point) => void;
@@ -28,7 +33,12 @@ export interface SocketContext {
 
 export const Context = createContext<SocketContext>({
   logs: [],
+<<<<<<< Updated upstream
   points: [],
+=======
+  routePoints: [],
+  shorePoints: [],
+>>>>>>> Stashed changes
   usvPoint: null,
   isRouteSelection: false,
   addPoint: (_: Point) => {},
@@ -42,7 +52,11 @@ export const Context = createContext<SocketContext>({
 
 export function SocketProvider({ children }: PropsWithChildren<any>) {
   const [logs, setLogs] = useState<string[]>([]);
+<<<<<<< Updated upstream
   const [points, setPoints] = useState<Point[]>([]);
+=======
+  const [routePoints, setRoutePoints] = useState<Point[]>([]);
+>>>>>>> Stashed changes
   const [usvPoint, setUsvPoint] = useState<Point | null>(null);
   const [isRouteSelection, setIsRouteSelection] = useState<boolean>(false);
 
@@ -116,7 +130,7 @@ export function SocketProvider({ children }: PropsWithChildren<any>) {
     <Context.Provider
       value={{
         logs,
-        points,
+        routePoints,
         usvPoint,
         isRouteSelection,
         addPoint,

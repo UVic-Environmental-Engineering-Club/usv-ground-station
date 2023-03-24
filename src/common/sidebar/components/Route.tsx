@@ -4,7 +4,7 @@ import { useSocketContext } from "../../../lib/contexts/SocketContext";
 
 function Route() {
   const {
-    points,
+    routePoints,
     deletePoint,
     isRouteSelection,
     clearRoute,
@@ -39,6 +39,7 @@ function Route() {
             {isRouteSelection ? "Shore" : "Route"} Selection
           </Button>
         </Flex>
+<<<<<<< Updated upstream
         <Box
           height={"56"}
           overflowY="scroll"
@@ -59,6 +60,44 @@ function Route() {
               </HStack>
             );
           })}
+=======
+        <Box height={"56"} overflowY="scroll">
+          {isRouteSelection ? (
+            shorePoints.map((point) => {
+              return (
+                <HStack key={point.lat + point.long} justifyContent="space-between">
+                  <p>
+                    lat: {point.lat.toFixed(4)}, long: {point.long.toFixed(4)}
+                  </p>
+                  <SmallCloseIcon
+                    _hover={{ cursor: "pointer" }}
+                    color="red.400"
+                    onClick={() => {
+                      deletePoint(point);
+                    }}
+                  />
+                </HStack>
+              );
+            })
+            ) : (
+              routePoints.map((point) => {
+                return (
+                  <HStack key={point.lat + point.long} justifyContent="space-between">
+                    <p>
+                      lat: {point.lat.toFixed(4)}, long: {point.long.toFixed(4)}
+                    </p>
+                    <SmallCloseIcon
+                      _hover={{ cursor: "pointer" }}
+                      color="red.400"
+                      onClick={() => {
+                        deletePoint(point);
+                      }}
+                    />
+                  </HStack>
+                );
+              })
+            )}
+>>>>>>> Stashed changes
         </Box>
       </Box>
         <Box w="100%" h="100%" >
